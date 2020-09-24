@@ -1,64 +1,114 @@
-from flask import Flask, render_templates
+from flask import Flask, jsonify, request, send_from_directory
+import json
 import random
 import sqlite3
 import time
 
 
-app = Flask(__name__)
-
-global conn
-
-defaultName = "New Ship"
-defaultShip = open("defaultShip.json", "r").read()
+app = Flask(__name__, static_url_path='')
+app.config['JSON_SORT_KEYS'] = False
 
 # DB Functions:
+def dbGetConnection():
+	return sqlite3.connect("shipcrafter.sqlite")
+
+def dbCreateTable():
+	dbEnsureConnection()
+	conn.execute("""
+CREATE TABLE IF NOT EXISTS 'ships'
+(
+	'id'	INTEGER NOT NULL UNIQUE,
+	'secret'	INTEGER NOT NULL,
+	'timestamp'	INTEGER NOT NULL,
+	'name'	TEXT,
+	'data'	TEXT,
+	PRIMARY KEY('id')
+)
+""")
+	conn.commit()
 
 def dbFetchShipList():
-	ships = conn.execute("SELECT id, name FROM ships ORDER BY timestamp")
-	return ships
+	connection = dbGetConnection()
+	ships = connection.execute("SELECT id, name FROM ships ORDER BY timestamp DESC")
+	shipList = {}
+	for (id, name) in ships:
+		shipList[id] = name
+	connection.close()
+	return shipList
 
 def dbFetchShip(id):
-	return conn.execute("SELECT data FROM ships WHERE id=?", (id,)).fetchone()
+	connection = dbGetConnection()
+	result = connection.execute("SELECT data FROM ships WHERE id=?", (id,)).fetchone()
+	connection.close()
+	if result is not None:
+		(ship,) = result
+		return ship
+	else:
+		return """{name" = "404"}"""
 
-def dbCreateShip():
-	id = random.getrandbits(64)
-	secret = random.getrandbits(64)
+def dbCreateShip(id):
+	connection = dbGetConnection()
+	defaultName = "New Ship"
+	defaultShip = open("defaultShip.json", "r").read()
+	if id != 0:
+		oldShip = json.loads(dbFetchShip(id))
+		oldShip["name"] = "Clone of " + oldShip["name"]
+		defaultShip = json.dumps(oldShip)
+		defaultName = oldShip["name"]
+	id = random.getrandbits(63)
+	secret = random.getrandbits(63)
 	timestamp = int(time.time())
-	c = conn.execute(f"INSERT INTO ships VALUES ('{id}','{secret}','{timestamp}','{defaultName}','{defaultShip}')")
-	c.commit()
+	connection.execute("INSERT INTO ships (id, secret, timestamp, name, data) VALUES (?, ?, ?, ?, ?)", (id, secret, timestamp, defaultName, defaultShip))
+	connection.commit()
+	connection.close()
+	return (id, secret)
 
 def dbUpdateShip(id, secret, name, data):
-	conn.execute("UPDATE ships set name=?, data=? WHERE id = ? AND secret = ?", (name, data, int(id), int(secret)))
-	conn.commit()
+	connection = dbGetConnection()
+	timestamp = int(time.time())
+	connection.execute("UPDATE ships set timestamp=?, name=?, data=? WHERE id = ? AND secret = ?", (timestamp, str(name), str(data), int(id), int(secret)))
+	connection.commit()
+	connection.close()
 
 # REST Functions:
 
 @app.route('/v1/', methods=['GET'])
 def webGetMainPage():
 	"""Return the main site."""
-	return render_template("shipcrafter.html")
+	return send_from_directory(".", "shipcrafter.html")
 
 @app.route('/v1/data/list.json', methods=['GET'])
 def webGetShipList():
-	shipList = {}
-	for (id, name) in dbFetchShipList():
-		shipList[id] = name
-	return shipList
+	return jsonify(dbFetchShipList())
 
 @app.route('/v1/data/<int:shipId>', methods=['GET'])
-def webGetShipList(shipId):
+def webGetShip(shipId):
 	ship = dbFetchShip(shipId)
-	if not ship: abort(404)
-	return ship
+	return jsonify(json.loads(ship))
 
 @app.route('/v1/data/<int:shipId>/<int:shipSecret>', methods=['PUT'])
-def webGetShipList(shipId, shipSecret):
-	dbUpdateShip(shipId, shipSecret, request.json["name"], request.json)
+def webUpdateShip(shipId, shipSecret):
+	dbUpdateShip(shipId, shipSecret, request.json["name"], json.dumps(request.json))
+	ship = dbFetchShip(shipId)
+	return jsonify(json.loads(ship))
 
+@app.route('/v1/data/newship', methods=['GET'])
+def webCreateNewShip():
+	(id, secret) = dbCreateShip(0)
+	ship = dbFetchShip(id)
+	return jsonify(json.loads(ship))
+
+@app.route('/v1/data/newship/<int:shipId>', methods=['GET'])
+def webClonehip(shipId):
+	(id, secret) = dbCreateShip(shipId)
+	ship = dbFetchShip(id)
+	return jsonify(json.loads(ship))
 
 # Main Check
 if __name__ == "__main__":
 	global conn
 	conn = sqlite3.connect("shipcrafter.sqlite")
+	dbCreateTable()
+	
 	conn.close()
 
