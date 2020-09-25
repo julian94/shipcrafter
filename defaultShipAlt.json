@@ -1,0 +1,44 @@
+{
+	"name": "New Ship",
+	"hull":
+	{
+		"name": "Hull",
+		"tons": 100,
+		"cost": 5000000,
+		"hull": 40,
+		"modifiers": []
+	},
+	"drives":
+	{
+		"m-drive":
+		{
+			"name": "M-Drive",
+			"tons": 1,
+			"cost": 2000000,
+			"power": 10,
+			"tl": 9,
+			"modifiers": []
+		},
+		"j-drive":
+		{
+			"name": "J-Drive",
+			"tons": 10,
+			"cost": 15000000,
+			"tl": 9,
+			"modifiers": []
+			}
+		},
+	},
+	"":
+	{
+		"":
+		{
+			"name": "",
+			"tons": ,
+			"cost": ,
+			"tl": ,
+			"modifiers": []
+			}
+		}
+	}
+}
