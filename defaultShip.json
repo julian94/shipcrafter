@@ -34,143 +34,152 @@
 			}
 		}
 	},
-	"m-drive":
+	"drives":
 	{
-		"name": "M-Drive"
-		"tons": 1,
-		"cost": 2000000,
-		"advantages": 0,
-		"tl": 9,
-		"modifiers":
+		"m-drive":
 		{
-			"base":
+			"name": "M-Drive"
+			"tons": 1,
+			"cost": 2000000,
+			"power": 10,
+			"advantages": 0,
+			"tl": 9,
+			"modifiers":
 			{
-				"tons": 0.01*"hull tons",
-				"cost": 2000000,
-				"tl": 1
-			},
-			"rating":
-			{
-				"name": 1,
-				"tons": 1,
-				"cost": 1,
-				"tl": 9
-			},
-			"type":
-			{
-				"name": "normal",
-				"tons": 1,
-				"cost": 1,
-				"tl": 1
-			},
-			"hardened":
-			{
-				"name": "Not Hardened",
-				"tons": 1,
-				"cost": 1
+				"base":
+				{
+					"tons": 0.01*"hull tons",
+					"cost": 2000000,
+					"power": 10,
+					"tl": 1
+				},
+				"rating":
+				{
+					"name": "Thrust 1",
+					"tons": 1,
+					"cost": 1,
+					"power": 1,
+					"tl": 9
+				},
+				"type":
+				{
+					"name": "normal",
+					"tons": 1,
+					"cost": 1,
+					"tl": 1
+				},
+				"hardened":
+				{
+					"name": "Not Hardened",
+					"tons": 1,
+					"cost": 1
+				}
 			}
-		}
-	},
-	"r-drive":
-	{
-		"name": "R-Drive"
-		"tons": 1,
-		"cost": 200000,
-		"advantages": 0,
-		"tl": 9,
-		"modifiers":
+		},
+		"r-drive":
 		{
-			"base":
+			"name": "R-Drive"
+			"tons": 1,
+			"cost": 200000,
+			"advantages": 0,
+			"tl": 9,
+			"modifiers":
 			{
-				"tons": 0.02*"hull tons",
-				"cost": 200000,
-				"tl": 0
-			},
-			"rating":
-			{
-				"name": 1,
-				"tons": 1,
-				"cost": 1,
-				"tl": 7
-			},
-			"type":
-			{
-				"name": "normal",
-				"tons": 1,
-				"cost": 1,
-				"tl": 0
-			},
-			"hardened":
-			{
-				"name": "Not Hardened",
-				"tons": 1,
-				"cost": 1
+				"base":
+				{
+					"tons": 0.02*"hull tons",
+					"cost": 200000,
+					"tl": 0
+				},
+				"rating":
+				{
+					"name": 1,
+					"tons": 1,
+					"cost": 1,
+					"tl": 7
+				},
+				"type":
+				{
+					"name": "normal",
+					"tons": 1,
+					"cost": 1,
+					"tl": 0
+				},
+				"hardened":
+				{
+					"name": "Not Hardened",
+					"tons": 1,
+					"cost": 1
+				}
 			}
-		}
-	},
-	"j-drive":
-	{
-		"name": "J-Drive"
-		"tons": 1,
-		"cost": 2000000,
-		"advantages": 0,
-		"tl": 9,
-		"modifiers":
+		},
+		"j-drive":
 		{
-			"base":
+			"name": "J-Drive"
+			"tons": 1,
+			"cost": 2000000,
+			"advantages": 0,
+			"tl": 9,
+			"modifiers":
 			{
-				"tons": 0.025*"hull tons"+5, "minimum 10 if J>0"
-				"cost": 2000000,
-				"tl": 0
-			},
-			"rating":
-			{
-				"name": 1,
-				"tons": 1,
-				"cost": 1,
-				"tl": 9
-			},
-			"type":
-			{
-				"name": "normal",
-				"tons": 1,
-				"cost": 1,
-				"tl": 0
-			},
-			"hardened":
-			{
-				"name": "Not Hardened",
-				"tons": 1,
-				"cost": 1
+				"base":
+				{
+					"tons": 0.025*"hull tons"+5, "minimum 10 if J>0"
+					"cost": 2000000,
+					"tl": 0
+				},
+				"rating":
+				{
+					"name": 1,
+					"tons": 1,
+					"cost": 1,
+					"tl": 9
+				},
+				"type":
+				{
+					"name": "normal",
+					"tons": 1,
+					"cost": 1,
+					"tl": 0
+				},
+				"hardened":
+				{
+					"name": "Not Hardened",
+					"tons": 1,
+					"cost": 1
+				}
 			}
-		}
+		},
 	},
 	"":
 	{
-		"name": ""
-		"tons": ,
-		"cost": ,
-		"advantages": 0,
-		"tl": 0,
-		"modifiers":
+		"":
 		{
-			"base":
+			"name": ""
+			"tons": ,
+			"cost": ,
+			"advantages": 0,
+			"tl": 0,
+			"modifiers":
 			{
-				"tons": ,
-				"cost": ,
-				"tl": 
-			},
-			"type":
-			{
-				"name": "normal",
-				"tons": 1,
-				"cost": 1
-			},
-			"reinforced":
-			{
-				"name": "normal",
-				"tons": 1,
-				"cost": 1
+				"base":
+				{
+					"tons": ,
+					"cost": ,
+					"tl": 
+				},
+				"type":
+				{
+					"name": "normal",
+					"tons": 1,
+					"cost": 1
+				},
+				"reinforced":
+				{
+					"name": "normal",
+					"tons": 1,
+					"cost": 1
+				}
 			}
 		}
 	}
