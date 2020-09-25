@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "497c32ac-7686-4578-9241-8f19e06191d8",
+		"name": "shipcrafter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Main page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{basepath}}/",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShipList.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{basepath}}/data/list.json",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						"data",
+						"list.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Ship",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{basepath}}/data/{{shipId}}",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						"data",
+						"{{shipId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Blank Ship",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{basepath}}/data/newship",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						"data",
+						"newship"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Ship",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Recently changed ship\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basepath}}/data/{{shipId}}/{{shipSecret}}",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						"data",
+						"{{shipId}}",
+						"{{shipSecret}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clone Ship",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{basepath}}/data/newship/{{shipId}}",
+					"host": [
+						"{{basepath}}"
+					],
+					"path": [
+						"data",
+						"newship",
+						"{{shipId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1ae7dfc2-4b5e-4f34-95de-c483a76a0c61",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "41331f40-a24f-4cf5-a311-09b55c7933b3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b280e91d-143d-4e1c-b7e6-50f4d11649b4",
+			"key": "basepath",
+			"value": "http://127.0.0.1:5000/v1"
+		},
+		{
+			"id": "184ed9f5-2722-4fb3-a763-3d419a7d3a36",
+			"key": "shipId",
+			"value": "6288774304285693731"
+		},
+		{
+			"id": "3e89089e-10c5-46c1-a6b8-9c201ae00733",
+			"key": "shipSecret",
+			"value": "9081534555739047849"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
