@@ -2,7 +2,7 @@
 	"name": "New Ship",
 	"hull":
 	{
-		"name": "Hull"
+		"name": "Hull",
 		"tons": 100,
 		"cost": 5000000,
 		"hull": 40,
@@ -38,7 +38,7 @@
 	{
 		"m-drive":
 		{
-			"name": "M-Drive"
+			"name": "M-Drive",
 			"tons": 1,
 			"cost": 2000000,
 			"power": 10,
@@ -78,7 +78,7 @@
 		},
 		"r-drive":
 		{
-			"name": "R-Drive"
+			"name": "R-Drive",
 			"tons": 1,
 			"cost": 200000,
 			"advantages": 0,
@@ -115,7 +115,7 @@
 		},
 		"j-drive":
 		{
-			"name": "J-Drive"
+			"name": "J-Drive",
 			"tons": 1,
 			"cost": 2000000,
 			"advantages": 0,
@@ -155,7 +155,7 @@
 	{
 		"":
 		{
-			"name": ""
+			"name": "",
 			"tons": ,
 			"cost": ,
 			"advantages": 0,
