@@ -1,3 +1,23 @@
 {
-	"name": "New Ship"
+	"name": "New Ship",
+	"hull":
+	{
+		"tons": 100,
+		"cost": 5000000,
+		"modifiers":
+		{
+			"type":
+			{
+				"name": "normal",
+				"tons": 1,
+				"price": 1
+			},
+			"reinforced":
+			{
+				"name": "normal",
+				"tons": 1,
+				"price": 1
+			}
+		}
+	}
 }
