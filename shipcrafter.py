@@ -77,6 +77,11 @@ def webGetMainPage():
 	"""Return the main site."""
 	return send_from_directory(".", "shipcrafter.html")
 
+@app.route('/v1/shipcrafter.js', methods=['GET'])
+def webGetJs():
+	"""Return the main site."""
+	return send_from_directory(".", "shipcrafter.js")
+
 @app.route('/v1/data/list.json', methods=['GET'])
 def webGetShipList():
 	return jsonify(dbFetchShipList())
