@@ -4,9 +4,18 @@ import random
 import sqlite3
 import time
 
-
 app = Flask(__name__, static_url_path='')
 app.config['JSON_SORT_KEYS'] = False
+
+# ship class
+class Ship:
+	def __init__(self, id, secret, timestamp, name, data):
+		self.id = id
+		self.secret = secret
+		self.timestamp = timestamp
+		self.name = name
+		self.data = data
+		
 
 # DB Functions:
 def dbGetConnection():
@@ -29,10 +38,10 @@ CREATE TABLE IF NOT EXISTS 'ships'
 
 def dbFetchShipList():
 	connection = dbGetConnection()
-	ships = connection.execute("SELECT id, name FROM ships ORDER BY timestamp DESC")
-	shipList = {}
-	for (id, name) in ships:
-		shipList[id] = name
+	ships = connection.execute("SELECT id, name, timestamp FROM ships ORDER BY timestamp DESC")
+	shipList = []
+	for (id, name, timestamp) in ships:
+		shipList.append(Ship(id, None, timestamp, name, None))
 	connection.close()
 	return shipList
 
